@@ -11,7 +11,7 @@ const mutations = {
 
 const actions = {
   // 헤더의 가시성 상태를 변경하는 액션을 정의합니다.
-  updateHeaderVisibility({ commit }, isVisible) {
+  updateHeaderVisibility({commit}, isVisible) {
     commit('setHeaderVisibility', isVisible);
   },
 };

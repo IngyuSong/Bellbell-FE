@@ -15,11 +15,13 @@ export default {}
 hr {
   border: 0;
 }
+
 footer {
   padding: 70px 0;
   text-align: center;
   opacity: 0.3;
 }
+
 a {
   text-decoration: none;
 }

@@ -39,13 +39,15 @@ export default {
     width: 150px;
     height: 100px;
   }
+
   color: orange;
   font-size: 20px;
   font-weight: bold;
 }
 
 .btn {
-  margin-top : 20%;
+  margin-top: 20%;
+
   img {
     cursor: pointer;
   }

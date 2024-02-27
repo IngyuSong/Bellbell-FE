@@ -12,12 +12,14 @@
   font-size: 30px;
   font-weight: bold;
   margin: 10px;
+
   img {
     width: 70px;
     height: 50px;
     margin-right: 10px;
   }
 }
+
 .letter {
   margin-top: 10px;
 }

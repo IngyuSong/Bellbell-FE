@@ -6,7 +6,7 @@
 
 <script>
 import Logo from "@/components/Logo.vue";
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 
 export default {
   components: {

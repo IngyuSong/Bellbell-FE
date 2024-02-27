@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   mounted() {
@@ -19,7 +19,7 @@ export default {
     this.handleLogin(code);
   },
   methods: {
-    ...mapActions('userStore', ['login']),
+    ...mapActions('authStore', ['login']),
     async handleLogin(code) {
       try {
         await this.login(code);
