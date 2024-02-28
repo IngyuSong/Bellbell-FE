@@ -9,14 +9,12 @@ export default {
     }
 
     try {
-      const data = {
-        accessToken: `${token}`
-      }
-      const response = await axios.post(
+      const response = await axios.get(
           `${import.meta.env.VITE_APP_SERVER_API_URI}/member`,
-          JSON.stringify(data), {
+          {
             headers: {
               "Content-Type": "application/json;charset=utf-8",
+              "Authorization": `${token}`
             }
           });
       return response.data;
