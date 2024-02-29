@@ -15,7 +15,7 @@ const actions = {
   async login({commit}, code) {
     try {
       const accessToken = await loginAPI.kakaoLogin(code);
-      commit('setAccessToken', accessToken.data.accessToken);
+      commit('setAccessToken', accessToken.data);
     } catch (error) {
       console.error(error);
     }
