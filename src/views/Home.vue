@@ -1,7 +1,9 @@
 <template>
   <div class="wrapper">
-    <div v-if="userInfo !== null">
+    <div v-if="userInfo !== null || notifications === null">
       <h3>{{ userInfo.data.nickname }} 님의 알림</h3>
+      <NotificationList :notifications="notifications"/>
+      <NotificationCreation/>
     </div>
     <div v-else>
       <p>Loading...</p>
@@ -10,13 +12,20 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import {mapGetters, mapState} from 'vuex';
 import userInfoAPI from "@/service/userInfoAPI.js";
 import {store} from "@/store/index.js";
+import NotificationList from '@/views/NotificationList.vue';
+import NotificationCreation from '@/views/NotificationCreation.vue';
 
 export default {
+  components: {
+    NotificationList,
+    NotificationCreation
+  },
   computed: {
-    ...mapGetters('userStore', ['userInfo'])
+    ...mapGetters('userStore', ['userInfo']),
+    ...mapState('notificationStore', ['notifications'])
   },
   async mounted() {
     const userInfo = await userInfoAPI.fetchUserInfo();
