@@ -12,6 +12,7 @@
 
 <script>
 import {mapActions} from "vuex";
+import router from "@/router/index.js";
 
 export default {
   mounted() {
@@ -23,7 +24,7 @@ export default {
     async handleLogin(code) {
       try {
         await this.login(code);
-        this.$router.push('/');
+        await router.push('/');
       } catch (error) {
         console.error(error);
         alert(error.message);
