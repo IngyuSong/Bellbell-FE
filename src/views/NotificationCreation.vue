@@ -68,6 +68,7 @@
 
 <script>
 import {mapState, mapActions} from 'vuex';
+import userInfoAPI from "@/service/userInfoAPI.js";
 
 export default {
   computed: {
@@ -84,11 +85,18 @@ export default {
     ...mapActions('modalStore', ['openModal', 'closeModal']),
 
     // 알림 생성 버튼 클릭 시 모달 열기
-    openModal() {
-      this.$store.dispatch('modalStore/openModal');
+    async openModal() {
       this.content = '';
       this.time = '';
       this.selectedDays = [];
+      const agreement = await userInfoAPI.checkTalkMessage();
+      if (agreement === false) {
+        alert('카카오톡 메시지 전송 동의 후 이용가능합니다.')
+        window.location.href = import.meta.env.VITE_APP_KAKAO_AUTHORIZATION_URI
+            + '&scope=talk_message';
+      } else {
+        this.$store.dispatch('modalStore/openModal');
+      }
     },
 
     // 모달 닫기
