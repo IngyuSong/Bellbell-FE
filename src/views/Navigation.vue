@@ -5,7 +5,7 @@
           :class="{ active: currentTab === 'NotificationList' }">기본 알림
       </li>
       <li @click="changeTab('UserNotification')"
-          :class="{ active: currentTab === 'UserNotification' }">사용자 알림
+          :class="{ active: currentTab === 'UserNotification' }">생성 알림
       </li>
     </ul>
   </nav>
@@ -46,7 +46,7 @@ ul {
 }
 
 li {
-  font-size: 25px;
+  font-size: 20px;
   display: inline;
   margin-right: 10px;
   cursor: pointer;

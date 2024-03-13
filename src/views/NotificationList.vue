@@ -1,3 +1,6 @@
 <template>
-  <p>기본 알림 목록</p>
+  <Weather/>
 </template>
+<script setup>
+import Weather from "@/views/Weather.vue";
+</script>
