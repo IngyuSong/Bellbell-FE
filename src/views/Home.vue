@@ -1,13 +1,12 @@
 <template>
   <div class="wrapper">
-    <div v-if="userInfo !== null || notifications === null">
+    <div v-if="userInfo !== null">
       <h3>{{ userInfo.data.nickname }} 님의 알림</h3>
-      <NotificationList :notifications="notifications"/>
-      <NotificationCreation/>
     </div>
     <div v-else>
       <p>Loading...</p>
     </div>
+    <Navigation/>
   </div>
 </template>
 
@@ -15,11 +14,13 @@
 import {mapGetters, mapState} from 'vuex';
 import userInfoAPI from "@/service/userInfoAPI.js";
 import {store} from "@/store/index.js";
-import NotificationList from '@/views/NotificationList.vue';
+import NotificationList from '@/views/UserNotificationList.vue';
 import NotificationCreation from '@/views/NotificationCreation.vue';
+import Navigation from "@/views/Navigation.vue";
 
 export default {
   components: {
+    Navigation,
     NotificationList,
     NotificationCreation
   },
