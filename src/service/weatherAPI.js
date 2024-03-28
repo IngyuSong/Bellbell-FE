@@ -23,7 +23,7 @@ export default {
   async activateWeatherNotification(notification) {
     try {
       const response= await axios.post(
-          `${import.meta.env.VITE_APP_SERVER_API_URI}/location`,
+          `${import.meta.env.VITE_APP_SERVER_API_URI}/weather`,
           notification,
           {
             headers: {
