@@ -3,7 +3,7 @@
     <div class="card-body">
       <form @submit.prevent="activeNotification" class="needs-validation" novalidate>
         <div class="card-title">
-          <span class="h5 fw-bold">날씨와 옷차림</span>
+          <span class="h5 fw-bold">날씨 및 옷차림</span>
           <div class="form-check form-switch" style="float: right">
             <label class="form-check-label" for="flexSwitchCheckDefault">알림 활성화</label>
             <input class="form-check-input" type="checkbox" role="switch"
@@ -75,7 +75,26 @@
 </style>
 
 <script>
+import {store} from "@/store/index.js";
+import weatherAPI from "@/service/weatherAPI.js";
+import userInfoAPI from "@/service/userInfoAPI.js";
+
 export default {
+  async mounted() {
+    const weatherInfo = await weatherAPI.getWeatherNotification();
+    if (weatherInfo) {
+      // 날씨 정보가 있으면 스토어에 저장
+      store.commit('weatherStore/setNotification', weatherInfo);
+      this.checked = weatherInfo.data.activated;
+      this.address = weatherInfo.data.address;
+      this.time = weatherInfo.data.time;
+      this.selectedDays = weatherInfo.data.day === null ? [] : weatherInfo.data.day.split(",");
+      if (this.checked) {
+        this.disabled = true;
+      }
+    }
+  },
+
   data() {
     return {
       disabled: false,
@@ -109,11 +128,7 @@ export default {
         this.selectedDays = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
       }
     },
-    activeNotification(checked) {
-      if (!checked) {
-        this.disabled = false;
-        return;
-      }
+    async activeNotification(checked) {
       // 유효성 검사
       const isValid = this.validateForm();
       if (!isValid) {
@@ -121,13 +136,23 @@ export default {
         return;
       }
 
-      const notification = {
+      const weather = {
+        isActivated: this.checked,
         address: this.address,
         time: this.time,
         day: this.selectedDays.toString()
       };
-      console.log(notification);
-      this.disabled = true;
+
+      const agreement = await userInfoAPI.checkTalkMessage();
+      if (agreement === false) {
+        alert('카카오톡 메시지 전송 동의 후 이용가능합니다.')
+        window.location.href = import.meta.env.VITE_APP_KAKAO_AUTHORIZATION_URI
+            + '&scope=talk_message';
+      } else {
+        this.$store.dispatch('weatherStore/activateWeatherNotification', weather);
+        console.log(weather);
+        this.disabled = checked;
+      }
     },
 
     validateForm() {
@@ -135,7 +160,7 @@ export default {
 
       // 주소 유효성 검사
       const addressFeedback = document.getElementById('addressFeedback');
-      if (this.address === '') {
+      if (this.address === null || this.address === '') {
         addressFeedback.style.display = 'block';
         isValid = false;
       } else {
