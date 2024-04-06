@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <h2 class="h2 text-warning">배송 완료 건은 자동으로 삭제됩니다.</h2>
     <ParcelNotificationList :notifications="notifications"/>
     <ParcelCreation/>
   </div>
