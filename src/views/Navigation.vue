@@ -4,6 +4,9 @@
       <li @click="changeTab('NotificationList')"
           :class="{ active: currentTab === 'NotificationList' }">기본 알림
       </li>
+      <li @click="changeTab('ParcelNotification')"
+          :class="{ active: currentTab === 'ParcelNotification' }">택배 알림
+      </li>
       <li @click="changeTab('UserNotification')"
           :class="{ active: currentTab === 'UserNotification' }">생성 알림
       </li>
@@ -12,6 +15,9 @@
 
   <div v-if="currentTab === 'NotificationList'">
     <NotificationList/>
+  </div>
+  <div v-else-if="currentTab === 'ParcelNotification'">
+    <ParcelNotification/>
   </div>
   <div v-else>
     <UserNotification/>
@@ -22,9 +28,10 @@
 import {mapState, mapActions} from 'vuex';
 import NotificationList from "@/views/NotificationList.vue";
 import UserNotification from "@/views/UserNotification.vue";
+import ParcelNotification from "@/views/ParcelNotification.vue";
 
 export default {
-  components: {UserNotification, NotificationList},
+  components: {ParcelNotification, UserNotification, NotificationList},
   computed: {
     ...mapState('navigationStore', ['currentTab'])
   },
@@ -51,11 +58,11 @@ li {
   margin-right: 10px;
   cursor: pointer;
   color: dimgray;
+  border-right: 2px solid orange;
 }
 
-li:first-child {
-  padding-right: 10px;
-  border-right: 2px solid orange;
+li:last-child {
+  border-right: none;
 }
 
 li.active {

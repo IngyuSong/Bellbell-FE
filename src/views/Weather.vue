@@ -85,7 +85,7 @@ export default {
     if (weatherInfo) {
       // 날씨 정보가 있으면 스토어에 저장
       store.commit('weatherStore/setNotification', weatherInfo);
-      this.checked = weatherInfo.data.activated;
+      this.checked = weatherInfo.data.isActivated;
       this.address = weatherInfo.data.address;
       this.time = weatherInfo.data.time;
       this.selectedDays = weatherInfo.data.day === null ? [] : weatherInfo.data.day.split(",");
