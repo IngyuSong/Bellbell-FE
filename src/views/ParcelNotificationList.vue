@@ -104,6 +104,7 @@ export default {
     async deleteNotification(notificationId) {
       try {
         await parcelAPI.deleteNotification(notificationId);
+        console.log("알림삭제 성공");
         await this.fetchNotifications(); // 알림 목록 다시 불러오기
       } catch (error) {
         console.error('택배 알림 삭제에 실패했습니다:', error);
