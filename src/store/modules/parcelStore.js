@@ -28,6 +28,7 @@ const actions = {
       await dispatch('fetchNotifications');
     } catch (error) {
       console.error('택배 알림 생성에 실패했습니다:', error);
+      alert('올바른 운송장 정보를 입력하세요.');
       throw error;
     }
   }
