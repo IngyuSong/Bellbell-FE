@@ -8,6 +8,7 @@ import navigationStore from "@/store/modules/navigationStore.js";
 import weatherStore from "@/store/modules/weatherStore.js";
 import parcelStore from "@/store/modules/parcelStore.js";
 import lunchStore from "@/store/modules/lunchStore.js";
+import fortuneStore from "@/store/modules/fortuneStore.js";
 
 export const store = createStore({
   modules: {
@@ -19,6 +20,7 @@ export const store = createStore({
     navigationStore,
     weatherStore,
     parcelStore,
-    lunchStore
+    lunchStore,
+    fortuneStore
   },
 });
